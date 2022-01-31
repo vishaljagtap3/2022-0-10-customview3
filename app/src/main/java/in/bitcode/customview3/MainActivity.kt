@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     init {
         for(i in 0 until 30) {
-            tasksList.add(Task("Sample Task number $i", (i%2) == 0 ))
+            tasksList.add(Task("Sample Task number $i", (i%2) == 0, i % 3 ))
         }
     }
 

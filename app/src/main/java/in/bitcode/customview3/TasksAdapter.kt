@@ -11,7 +11,7 @@ class TasksAdapter(private var tasksList: ArrayList<Task>) :
 
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var taskView : TaskView
+        var taskView: TaskView
 
         init {
             taskView = itemView as TaskView
@@ -32,19 +32,12 @@ class TasksAdapter(private var tasksList: ArrayList<Task>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.task_layout, null)
+            TaskView(parent.context)
         )
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.taskView.text = tasksList[position].title
-        if(tasksList[position].state) {
-            holder.taskView.setTextColor(Color.GREEN)
-        }
-        else {
-            holder.taskView.setTextColor(Color.BLACK)
-        }
+        holder.taskView.task = tasksList[position]
     }
 
 }
