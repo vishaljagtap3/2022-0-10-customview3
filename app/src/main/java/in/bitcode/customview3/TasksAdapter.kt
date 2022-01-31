@@ -1,19 +1,25 @@
 package `in`.bitcode.customview3
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class TasksAdapter(private var tasksList: ArrayList<String>) :
+class TasksAdapter(private var tasksList: ArrayList<Task>) :
     RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
 
 
-    class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var taskView : TaskView
 
         init {
             taskView = itemView as TaskView
+
+            taskView.setOnClickListener {
+                tasksList[adapterPosition].state = !tasksList[adapterPosition].state
+                notifyItemChanged(adapterPosition)
+            }
         }
     }
 
@@ -32,7 +38,13 @@ class TasksAdapter(private var tasksList: ArrayList<String>) :
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.taskView.text = tasksList[position]
+        holder.taskView.text = tasksList[position].title
+        if(tasksList[position].state) {
+            holder.taskView.setTextColor(Color.GREEN)
+        }
+        else {
+            holder.taskView.setTextColor(Color.BLACK)
+        }
     }
 
 }
